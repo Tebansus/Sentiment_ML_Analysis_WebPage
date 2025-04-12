@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: sentiment-analysis-db
+    environment:
+      POSTGRES_DB: sentiment_analysis_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+  redis:
+    image: redis:alpine
+    container_name: sentiment-analysis-redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentiment-analysis-api
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      ENV: dev
+      DEV_DB_HOST: postgres
+      DEV_DB_PORT: 5432
+      DEV_DB_NAME: sentiment_analysis_dev
+      DEV_DB_USER: postgres
+      DEV_DB_PASSWORD: postgres
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    restart: always
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: sentiment-analysis-frontend
+    depends_on:
+      - backend
+    environment:
+      API_BASE_URL: http://backend:8000/api
+    volumes:
+      - ./:/app
+    ports:
+      - "8501:8501"
+    restart: always
+
+volumes:
+  postgres_data: 
