@@ -1,6 +1,6 @@
 # Stock Market Sentiment Analysis
 
-A comprehensive tool for analyzing sentiment in social media and news about stocks to aid investment decisions.
+A comprehensive tool for analyzing sentiment in social media and news about stocks to aid investment decisions. Currently working with mock data, looking for alternative API for Twitter.
 
 ## Project Overview
 
