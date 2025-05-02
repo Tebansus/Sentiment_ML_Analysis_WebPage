@@ -174,6 +174,4 @@ Access the dashboard at http://localhost:8501
 - Twitter API
 - FastAPI and Streamlit teams
 
----
 
-*Disclaimer: This system is for educational purposes only and should not be used for actual investment decisions.* 
