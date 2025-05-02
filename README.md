@@ -170,8 +170,6 @@ Access the dashboard at http://localhost:8501
 ## Acknowledgments
 
 - NLTK and VADER Sentiment Analysis
-- TensorFlow and Keras
-- Twitter API
-- FastAPI and Streamlit teams
+
 
 
